@@ -1,0 +1,39 @@
+{
+  "generator-jhipster": {
+    "applicationType": "monolith",
+    "gitCompany": "",
+    "baseName": "TcaSwag",
+    "packageName": "io.github.tcaswag",
+    "packageFolder": "io/github/tcaswag",
+    "serverPort": 8080,
+    "serviceDiscoveryType": false,
+    "authenticationType": "jwt",
+    "uaaBaseName": "../uaa",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "enableSwaggerCodegen": false,
+    "messageBroker": false,
+    "buildTool": "maven",
+    "useSass": false,
+    "clientPackageManager": "npm",
+    "testFrameworks": [],
+    "enableTranslation": false,
+    "nativeLanguage": "en",
+    "languages": [
+      "en"
+    ],
+    "clientFramework": "angularX",
+    "jhiPrefix": "jhi",
+    "jhipsterVersion": "5.7.2",
+    "jwtSecretKey": "YzhjYTgyYTczYWE1MjEyZDZkNzhjNzkxNDExZjhjMzRhMzlkOTg3NjlkMTA1ZGIxNjc1YTUwMzNiYzQ2YWZlZmUwMmYyYTcxYTVhZDlmZTRkZDI1NGIxZTY0NDA4NTc4ODY5YjRmYzM2MzBlMWE5YWViMWU0NzZiMWYxYWJjY2U=",
+    "otherModules": []
+  },
+  "git-provider": "GitHub",
+  "git-company": "macbernic",
+  "repository-name": "TcaSwag-jhipster-app"
+}
