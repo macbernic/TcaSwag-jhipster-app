@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="productSku">
+            <h2><span>Product Sku</span> {{productSku.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Size</span></dt>
+                <dd>
+                    <span>{{productSku.size}}</span>
+                </dd>
+                <dt><span>Gender</span></dt>
+                <dd>
+                    <span>{{productSku.gender}}</span>
+                </dd>
+                <dt><span>Custom Text</span></dt>
+                <dd>
+                    <span>{{productSku.customText}}</span>
+                </dd>
+                <dt><span>Tca Order</span></dt>
+                <dd>
+                    <div *ngIf="productSku.tcaOrder">
+                        <a [routerLink]="['/tca-order', productSku.tcaOrder?.id, 'view']">{{productSku.tcaOrder?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Product</span></dt>
+                <dd>
+                    <div *ngIf="productSku.product">
+                        <a [routerLink]="['/product', productSku.product?.id, 'view']">{{productSku.product?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/product-sku', productSku.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
