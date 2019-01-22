@@ -1,0 +1,63 @@
+enum OrderStatus {
+	DRAFT, SUBMITTED, PAYED, DELIVERED
+}
+
+enum SportType {
+	RUNNING, SWIMMING, CYCLING, TRIATHLON, SWIMRUN
+}
+
+enum ProductSize {
+	UNIQUE, XSMALL, SMALL, MEDIUM, LARGE, XLARGE, XXLARGE
+}
+
+enum GenderType {
+	MALE, FEMALE, BOTH
+}
+
+// TODO audit des modifications
+entity TcaOrder {
+	orderId Integer required,
+	status OrderStatus required,
+	date Instant required,
+    first Boolean required,
+    amount Float
+}
+
+entity Product {
+	productId String required minlength(3),
+	title String required minlength(3),
+	desc Blob,
+	creationDate Instant required,
+	brand String required minlength(3),
+    price Float required,
+    subvention Float,
+    sport SportType
+}
+
+entity ProductSku {
+	size ProductSize required,
+    gender GenderType required,
+    customText String
+}
+
+entity TcaMember {
+	nickname String required minlength(3)
+}
+
+relationship ManyToOne {
+	ProductSku{product required} to Product
+    TcaOrder{tcaMember required} to TcaMember{orders}
+}
+
+relationship OneToMany {
+	TcaOrder{productSkus required} to ProductSku
+}
+
+relationship OneToOne {
+	TcaMember{user} to User
+}
+
+// filter Product
+// filter TcaOrder
+paginate TcaOrder with infinite-scroll
+paginate Product with infinite-scroll
