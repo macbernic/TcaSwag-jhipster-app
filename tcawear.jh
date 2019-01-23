@@ -1,0 +1,77 @@
+enum OrderStatus {
+  DRAFT, SUBMITTED, PAYED, DELIVERED, ARCHIVED
+}
+
+enum SportType {
+  RUNNING, SWIMMING, CYCLING, TRIATHLON, SWIMRUN
+}
+
+enum ProductSize {
+  UNIQUE, XXSMALL, XSMALL, SMALL, MEDIUM, LARGE, XLARGE, XXLARGE
+}
+
+enum GenderType {
+  MALE, FEMALE, UNISEX
+}
+
+// TODO audit des modifications (creationDate, lastUpdate...)
+// TODO populate product model
+// TODO populate members
+
+/* product model */
+
+entity Product {
+  productId String required minlength(3),
+  title String required minlength(3),
+  desc TextBlob,
+  brand String required minlength(3),
+  sport SportType,
+  size ProductSize required,
+  gender GenderType required,
+  retailPrice Float required,
+  membersFirstPrice Float,
+  membersPrice Float
+}
+
+entity ProductAsset {
+  title String required minlength(3),
+  asset ImageBlob,
+}
+
+/* order model */
+
+entity MemberOrder {
+  orderId String required minlength(6),
+  status OrderStatus required,
+  first Boolean required,
+  amount Float
+}
+
+entity MemberOrderItem {
+  customText String,
+  appliedPrice Float required
+}
+
+entity Member {
+  nickname String required minlength(3)
+}
+
+relationship ManyToOne {
+  MemberOrderItem{sku} to Product{orderedItems}
+  MemberOrder{tcaMember required} to Member{orders}
+}
+
+relationship OneToMany {
+  MemberOrder{items required} to MemberOrderItem
+  Product{assets} to ProductAsset{product required}
+}
+
+relationship OneToOne {
+  Member{user} to User
+}
+
+paginate Member with infinite-scroll
+paginate MemberOrder with infinite-scroll
+paginate MemberOrderItem with infinite-scroll
+paginate Product with infinite-scroll
+paginate ProductAsset with infinite-scroll
