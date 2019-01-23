@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity MemberOrderItem.
+    -->
+    <changeSet id="20190123093932-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="member_order_id"
+                                 baseTableName="member_order_item"
+                                 constraintName="fk_member_order_item_member_order_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="member_order"/>
+
+        <addForeignKeyConstraint baseColumnNames="sku_id"
+                                 baseTableName="member_order_item"
+                                 constraintName="fk_member_order_item_sku_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"/>
+
+    </changeSet>
+</databaseChangeLog>
