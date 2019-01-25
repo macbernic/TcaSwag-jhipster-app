@@ -1,0 +1,94 @@
+{
+    "name": "Product",
+    "fields": [
+        {
+            "fieldName": "productId",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength"
+            ],
+            "fieldValidateRulesMinlength": 3
+        },
+        {
+            "fieldName": "title",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength"
+            ],
+            "fieldValidateRulesMinlength": 3
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "brand",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength"
+            ],
+            "fieldValidateRulesMinlength": 3
+        },
+        {
+            "fieldName": "sport",
+            "fieldType": "SportType",
+            "fieldValues": "RUNNING,SWIMMING,CYCLING,TRIATHLON,SWIMRUN"
+        },
+        {
+            "fieldName": "size",
+            "fieldType": "ProductSize",
+            "fieldValues": "UNIQUE,XXSMALL,XSMALL,SMALL,MEDIUM,LARGE,XLARGE,XXLARGE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "gender",
+            "fieldType": "GenderType",
+            "fieldValues": "MALE,FEMALE,UNISEX",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "retailPrice",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "membersFirstPrice",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "membersPrice",
+            "fieldType": "Float"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "assets",
+            "otherEntityName": "productAsset",
+            "otherEntityRelationshipName": "product"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "orderedItems",
+            "otherEntityName": "memberOrderItem",
+            "otherEntityRelationshipName": "product"
+        }
+    ],
+    "changelogDate": "20190125105952",
+    "javadoc": "product model",
+    "entityTableName": "product",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

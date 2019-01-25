@@ -1,0 +1,68 @@
+<div>
+    <h2 id="page-heading">
+        <span>Member Order Items</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-member-order-item" [routerLink]="['/member-order-item/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Member Order Item
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="memberOrderItems">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="customText"><span>Custom Text</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="appliedPrice"><span>Applied Price</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="product.id"><span>Product</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="memberOrder.id"><span>Member Order</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let memberOrderItem of memberOrderItems ;trackBy: trackId">
+                <td><a [routerLink]="['/member-order-item', memberOrderItem.id, 'view' ]">{{memberOrderItem.id}}</a></td>
+                <td>{{memberOrderItem.customText}}</td>
+                <td>{{memberOrderItem.appliedPrice}}</td>
+                <td>
+                    <div *ngIf="memberOrderItem.product">
+                        <a [routerLink]="['../product', memberOrderItem.product?.id, 'view' ]" >{{memberOrderItem.product?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="memberOrderItem.memberOrder">
+                        <a [routerLink]="['../member-order', memberOrderItem.memberOrder?.id, 'view' ]" >{{memberOrderItem.memberOrder?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/member-order-item', memberOrderItem.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/member-order-item', memberOrderItem.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'member-order-item/'+ memberOrderItem.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

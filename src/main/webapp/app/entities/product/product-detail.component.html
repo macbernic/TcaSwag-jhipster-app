@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="product">
+            <h2><span>Product</span> {{product.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Product Id</span></dt>
+                <dd>
+                    <span>{{product.productId}}</span>
+                </dd>
+                <dt><span>Title</span></dt>
+                <dd>
+                    <span>{{product.title}}</span>
+                </dd>
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{product.description}}</span>
+                </dd>
+                <dt><span>Brand</span></dt>
+                <dd>
+                    <span>{{product.brand}}</span>
+                </dd>
+                <dt><span>Sport</span></dt>
+                <dd>
+                    <span>{{product.sport}}</span>
+                </dd>
+                <dt><span>Size</span></dt>
+                <dd>
+                    <span>{{product.size}}</span>
+                </dd>
+                <dt><span>Gender</span></dt>
+                <dd>
+                    <span>{{product.gender}}</span>
+                </dd>
+                <dt><span>Retail Price</span></dt>
+                <dd>
+                    <span>{{product.retailPrice}}</span>
+                </dd>
+                <dt><span>Members First Price</span></dt>
+                <dd>
+                    <span>{{product.membersFirstPrice}}</span>
+                </dd>
+                <dt><span>Members Price</span></dt>
+                <dd>
+                    <span>{{product.membersPrice}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/product', product.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

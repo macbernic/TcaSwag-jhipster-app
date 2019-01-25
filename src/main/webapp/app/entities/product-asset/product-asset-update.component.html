@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-product-asset-heading">Create or edit a Product Asset</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!productAsset.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="productAsset.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                        [(ngModel)]="productAsset.title" required minlength="3"/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.minlength">
+                        This field is required to be at least 3 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_asset">Asset</label>
+                    <div>
+                        <img [src]="'data:' + productAsset.assetContentType + ';base64,' + productAsset.asset" style="max-height: 100px;" *ngIf="productAsset.asset" alt="productAsset image"/>
+                        <div *ngIf="productAsset.asset" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{productAsset.assetContentType}}, {{byteSize(productAsset.asset)}}</span>
+                            <button type="button" (click)="clearInputImage('asset', 'assetContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_asset" (change)="setFileData($event, productAsset, 'asset', true)" accept="image/*"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="asset" id="field_asset"
+                        [(ngModel)]="productAsset.asset" />
+                    <input type="hidden" class="form-control" name="assetContentType" id="field_assetContentType"
+                        [(ngModel)]="productAsset.assetContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_product">Product</label>
+                    <select class="form-control" id="field_product" name="product" [(ngModel)]="productAsset.product"  required>
+                        <option *ngIf="!editForm.value.product" [ngValue]="null" selected></option>
+                        <option [ngValue]="productOption.id === productAsset.product?.id ? productAsset.product : productOption" *ngFor="let productOption of products; trackBy: trackProductById">{{productOption.id}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.product?.dirty && editForm.controls.product?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.product?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
