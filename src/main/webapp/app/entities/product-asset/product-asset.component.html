@@ -1,0 +1,67 @@
+<div>
+    <h2 id="page-heading">
+        <span>Product Assets</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-product-asset" [routerLink]="['/product-asset/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Product Asset
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="productAssets">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="title"><span>Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="asset"><span>Asset</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="product.id"><span>Product</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let productAsset of productAssets ;trackBy: trackId">
+                <td><a [routerLink]="['/product-asset', productAsset.id, 'view' ]">{{productAsset.id}}</a></td>
+                <td>{{productAsset.title}}</td>
+                <td>
+                    <a *ngIf="productAsset.asset" (click)="openFile(productAsset.assetContentType, productAsset.asset)">
+                        <img [src]="'data:' + productAsset.assetContentType + ';base64,' + productAsset.asset" style="max-height: 30px;" alt="productAsset image"/>
+                    </a>
+                    <span *ngIf="productAsset.asset">{{productAsset.assetContentType}}, {{byteSize(productAsset.asset)}}</span>
+                </td>
+                <td>
+                    <div *ngIf="productAsset.product">
+                        <a [routerLink]="['../product', productAsset.product?.id, 'view' ]" >{{productAsset.product?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/product-asset', productAsset.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/product-asset', productAsset.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'product-asset', { outlets: { popup: productAsset.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

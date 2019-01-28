@@ -38,6 +38,16 @@ public class CacheConfiguration {
             cm.createCache(io.github.tcaswag.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(io.github.tcaswag.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(io.github.tcaswag.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(io.github.tcaswag.domain.Product.class.getName(), jcacheConfiguration);
+            cm.createCache(io.github.tcaswag.domain.Product.class.getName() + ".assets", jcacheConfiguration);
+            cm.createCache(io.github.tcaswag.domain.Product.class.getName() + ".availableSkuses", jcacheConfiguration);
+            cm.createCache(io.github.tcaswag.domain.ProductSku.class.getName(), jcacheConfiguration);
+            cm.createCache(io.github.tcaswag.domain.ProductAsset.class.getName(), jcacheConfiguration);
+            cm.createCache(io.github.tcaswag.domain.MemberOrder.class.getName(), jcacheConfiguration);
+            cm.createCache(io.github.tcaswag.domain.MemberOrder.class.getName() + ".items", jcacheConfiguration);
+            cm.createCache(io.github.tcaswag.domain.MemberOrderItem.class.getName(), jcacheConfiguration);
+            cm.createCache(io.github.tcaswag.domain.Member.class.getName(), jcacheConfiguration);
+            cm.createCache(io.github.tcaswag.domain.Member.class.getName() + ".orders", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -1,0 +1,45 @@
+{
+    "name": "MemberOrderItem",
+    "fields": [
+        {
+            "fieldName": "customText",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "appliedPrice",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "product",
+            "otherEntityName": "product",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "productSku",
+            "otherEntityName": "productSku",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "memberOrder",
+            "otherEntityName": "memberOrder",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190128125758",
+    "entityTableName": "member_order_item",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
